@@ -1,28 +1,19 @@
-# unplugin-starter
+# unplugin-next-app-router
 
-[![NPM version](https://img.shields.io/npm/v/unplugin-starter?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-starter)
+[![NPM version](https://img.shields.io/npm/v/unplugin-next-app-router?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-next-app-router)
 
-Starter template for [unplugin](https://github.com/unjs/unplugin).
-
-## Template Usage
-
-To use this template, clone it down using:
-
-```bash
-npx degit unplugin/unplugin-starter my-unplugin
-```
-
-And do a global replacement of `unplugin-starter` with your plugin name.
-
-Then you can start developing your unplugin 🔥
-
-To test your plugin, run: `pnpm run dev`
-To release a new version, run: `pnpm run release`
+File-based routing, similar to SvelteKit and Next.js App Router. Powered by [unplugin](https://github.com/unjs/unplugin).
 
 ## Install
 
 ```bash
-npm i unplugin-starter
+npm i -D unplugin-next-app-router
+# or
+yarn add -D unplugin-next-app-router
+# or
+pnpm add -D unplugin-next-app-router
+# or
+bun add -D unplugin-next-app-router
 ```
 
 <details>
@@ -30,16 +21,16 @@ npm i unplugin-starter
 
 ```ts
 // vite.config.ts
-import Starter from 'unplugin-starter/vite'
+import NextAppRouter from 'unplugin-next-app-router/vite'
 
 export default defineConfig({
-  plugins: [
-    Starter({ /* options */ }),
-  ],
+    plugins: [
+        NextAppRouter({
+            /* options */
+        }),
+    ],
 })
 ```
-
-Example: [`playground/`](./playground/)
 
 <br></details>
 
@@ -48,12 +39,14 @@ Example: [`playground/`](./playground/)
 
 ```ts
 // rollup.config.js
-import Starter from 'unplugin-starter/rollup'
+import NextAppRouter from 'unplugin-next-app-router/rollup'
 
 export default {
-  plugins: [
-    Starter({ /* options */ }),
-  ],
+    plugins: [
+        NextAppRouter({
+            /* options */
+        }),
+    ],
 }
 ```
 
@@ -65,42 +58,12 @@ export default {
 ```ts
 // webpack.config.js
 module.exports = {
-  /* ... */
-  plugins: [
-    require('unplugin-starter/webpack')({ /* options */ })
-  ]
-}
-```
-
-<br></details>
-
-<details>
-<summary>Nuxt</summary><br>
-
-```ts
-// nuxt.config.js
-export default defineNuxtConfig({
-  modules: [
-    ['unplugin-starter/nuxt', { /* options */ }],
-  ],
-})
-```
-
-> This module works for both Nuxt 2 and [Nuxt Vite](https://github.com/nuxt/vite)
-
-<br></details>
-
-<details>
-<summary>Vue CLI</summary><br>
-
-```ts
-// vue.config.js
-module.exports = {
-  configureWebpack: {
+    /* ... */
     plugins: [
-      require('unplugin-starter/webpack')({ /* options */ }),
+        require('unplugin-next-app-router/webpack')({
+            /* options */
+        }),
     ],
-  },
 }
 ```
 
@@ -112,11 +75,43 @@ module.exports = {
 ```ts
 // esbuild.config.js
 import { build } from 'esbuild'
-import Starter from 'unplugin-starter/esbuild'
+import NextAppRouter from 'unplugin-next-app-router/esbuild'
 
 build({
-  plugins: [Starter()],
+    plugins: [NextAppRouter()],
 })
 ```
 
 <br></details>
+
+## Setup
+
+```ts
+// env.d.ts
+/// <reference types="vite/client" />
+/// <reference types="unplugin-next-app-router/client" />
+```
+
+```json lines
+// tsconfig.json
+{
+    "compilerOptions": {
+        // ...
+        "types": ["unplugin-vue-router/client"]
+    }
+}
+```
+
+```diff
+ import { StrictMode } from 'react'
+ import { createRoot } from 'react-dom/client'
+ import { RouterProvider } from 'react-router'
++import { browserRouter } from 'virtual:unplugin-next-app-router'
+
+createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+-       <App/>
++       <RouterProvider router={browserRouter} />
+    </StrictMode>,
+)
+```

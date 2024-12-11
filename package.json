@@ -1,144 +1,149 @@
 {
-  "name": "unplugin-starter",
-  "type": "module",
-  "version": "0.1.0",
-  "packageManager": "pnpm@9.9.0",
-  "description": "",
-  "license": "MIT",
-  "homepage": "https://github.com/antfu/unplugin-starter#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/antfu/unplugin-starter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/antfu/unplugin-starter/issues"
-  },
-  "keywords": [
-    "unplugin",
-    "vite",
-    "webpack",
-    "rollup",
-    "transform"
-  ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+    "name": "unplugin-next-app-router",
+    "version": "0.0.0",
+    "description": "File-based routing, similar to SvelteKit and Next.js App Router.",
+    "keywords": [
+        "unplugin",
+        "vite",
+        "webpack",
+        "rollup",
+        "types",
+        "typed",
+        "react-router"
+    ],
+    "homepage": "https://github.com/zjy040525/unplugin-next-app-router#readme",
+    "bugs": {
+        "url": "https://github.com/zjy040525/unplugin-next-app-router/issues"
     },
-    "./astro": {
-      "import": "./dist/astro.js",
-      "require": "./dist/astro.cjs"
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zjy040525/unplugin-next-app-router.git"
     },
-    "./rspack": {
-      "import": "./dist/rspack.js",
-      "require": "./dist/rspack.cjs"
+    "license": "MIT",
+    "type": "module",
+    "exports": {
+        ".": {
+            "types": {
+                "require": "./dist/index.d.cts",
+                "import": "./dist/index.d.ts"
+            },
+            "require": "./dist/index.cjs",
+            "import": "./dist/index.js"
+        },
+        "./vite": {
+            "types": {
+                "require": "./dist/vite.d.cts",
+                "import": "./dist/vite.d.ts"
+            },
+            "require": "./dist/vite.cjs",
+            "import": "./dist/vite.js"
+        },
+        "./webpack": {
+            "types": {
+                "require": "./dist/webpack.d.cts",
+                "import": "./dist/webpack.d.ts"
+            },
+            "require": "./dist/webpack.cjs",
+            "import": "./dist/webpack.js"
+        },
+        "./rollup": {
+            "types": {
+                "require": "./dist/rollup.d.cts",
+                "import": "./dist/rollup.d.ts"
+            },
+            "require": "./dist/rollup.cjs",
+            "import": "./dist/rollup.js"
+        },
+        "./esbuild": {
+            "types": {
+                "require": "./dist/esbuild.d.cts",
+                "import": "./dist/esbuild.d.ts"
+            },
+            "require": "./dist/esbuild.cjs",
+            "import": "./dist/esbuild.js"
+        },
+        "./types": {
+            "types": {
+                "require": "./dist/types.d.cts",
+                "import": "./dist/types.d.ts"
+            },
+            "require": "./dist/types.cjs",
+            "import": "./dist/types.js"
+        },
+        "./client": {
+            "types": "./client.d.ts"
+        }
     },
-    "./vite": {
-      "import": "./dist/vite.js",
-      "require": "./dist/vite.cjs"
+    "main": "dist/index.cjs",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "typesVersions": {
+        "*": {
+            "./client": [
+                "./client.d.ts"
+            ],
+            "*": [
+                "./dist/*",
+                "./*"
+            ]
+        }
     },
-    "./webpack": {
-      "import": "./dist/webpack.js",
-      "require": "./dist/webpack.cjs"
+    "files": [
+        "dist",
+        "client.d.ts"
+    ],
+    "scripts": {
+        "build": "tsc --noEmit --skipLibCheck && tsup",
+        "build:fix": "esno scripts/postbuild.ts",
+        "dev": "tsup --watch src",
+        "format": "prettier --write .",
+        "prepublishOnly": "npm run build",
+        "release": "bumpp && npm publish",
+        "start": "esno src/index.ts",
+        "test": "vitest",
+        "vite6": "npm -C examples/vite6 run dev"
     },
-    "./rollup": {
-      "import": "./dist/rollup.js",
-      "require": "./dist/rollup.cjs"
+    "dependencies": {
+        "fast-glob": "^3.3.2",
+        "module-from-string": "^3.3.1",
+        "typescript": "^5.5.4",
+        "unplugin": "^2.0.0"
     },
-    "./esbuild": {
-      "import": "./dist/esbuild.js",
-      "require": "./dist/esbuild.cjs"
+    "devDependencies": {
+        "@types/node": "^22.5.1",
+        "bumpp": "^9.5.2",
+        "chalk": "^5.3.0",
+        "esno": "^4.7.0",
+        "prettier": "3.4.2",
+        "prettier-plugin-organize-imports": "4.1.0",
+        "prettier-plugin-packagejson": "2.5.6",
+        "tsup": "^8.2.4",
+        "vitest": "^2.1.8"
     },
-    "./nuxt": {
-      "import": "./dist/nuxt.js",
-      "require": "./dist/nuxt.cjs"
+    "peerDependencies": {
+        "esbuild": "*",
+        "react-router": "^7",
+        "rollup": "^3",
+        "vite": ">=3",
+        "webpack": "^4 || ^5"
     },
-    "./farm": {
-      "import": "./dist/farm.js",
-      "require": "./dist/farm.cjs"
+    "peerDependenciesMeta": {
+        "esbuild": {
+            "optional": true
+        },
+        "rollup": {
+            "optional": true
+        },
+        "vite": {
+            "optional": true
+        },
+        "webpack": {
+            "optional": true
+        }
     },
-    "./types": {
-      "import": "./dist/types.js",
-      "require": "./dist/types.cjs"
-    },
-    "./*": "./*"
-  },
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
+    "packageManager": "pnpm@9.14.4",
+    "volta": {
+        "node": "20.18.1",
+        "pnpm": "9.14.4"
     }
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch src",
-    "build:fix": "esno scripts/postbuild.ts",
-    "lint": "eslint .",
-    "play": "npm -C playground run dev",
-    "prepublishOnly": "npm run build",
-    "release": "bumpp && npm publish",
-    "start": "esno src/index.ts",
-    "test": "vitest"
-  },
-  "peerDependencies": {
-    "@farmfe/core": ">=1",
-    "@nuxt/kit": "^3",
-    "@nuxt/schema": "^3",
-    "esbuild": "*",
-    "rollup": "^3",
-    "vite": ">=3",
-    "webpack": "^4 || ^5"
-  },
-  "peerDependenciesMeta": {
-    "@farmfe/core": {
-      "optional": true
-    },
-    "@nuxt/kit": {
-      "optional": true
-    },
-    "@nuxt/schema": {
-      "optional": true
-    },
-    "esbuild": {
-      "optional": true
-    },
-    "rollup": {
-      "optional": true
-    },
-    "vite": {
-      "optional": true
-    },
-    "webpack": {
-      "optional": true
-    }
-  },
-  "dependencies": {
-    "unplugin": "^1.12.2"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "^3.0.0",
-    "@nuxt/kit": "^3.13.0",
-    "@nuxt/schema": "^3.13.0",
-    "@types/node": "^22.5.1",
-    "bumpp": "^9.5.2",
-    "chalk": "^5.3.0",
-    "eslint": "^9.9.1",
-    "esno": "^4.7.0",
-    "fast-glob": "^3.3.2",
-    "nodemon": "^3.1.4",
-    "rollup": "^4.21.2",
-    "tsup": "^8.2.4",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.2",
-    "vitest": "^2.0.5",
-    "webpack": "^5.94.0"
-  }
 }
