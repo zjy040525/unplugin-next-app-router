@@ -104,6 +104,7 @@
         "vite6": "npm -C examples/vite6 run dev"
     },
     "dependencies": {
+        "chalk": "^5.3.0",
         "fast-glob": "^3.3.2",
         "module-from-string": "^3.3.1",
         "typescript": "^5.5.4",
@@ -112,7 +113,6 @@
     "devDependencies": {
         "@types/node": "^22.5.1",
         "bumpp": "^9.5.2",
-        "chalk": "^5.3.0",
         "esno": "^4.7.0",
         "prettier": "3.4.2",
         "prettier-plugin-organize-imports": "4.1.0",
